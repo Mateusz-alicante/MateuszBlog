@@ -7,3 +7,4 @@
 /front-end/.env.test.local
 /front-end/.env.production.local
 /front-end/npm-debug.log*
+.env

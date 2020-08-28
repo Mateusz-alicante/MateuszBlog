@@ -76,7 +76,7 @@ const editorConfiguration = function(token) {
     ImageCaption, ImageStyle, ImageToolbar, ImageResize,
     Font, FontFamily, Highlight, Heading, TodoList, List,
     SpecialCharacters, SpecialCharactersEssentials, SpecialCharactersCurrency,
-    TableToolbar, Table, TableProperties, TableCellProperties, Link],
+    TableToolbar, Table, TableProperties, TableCellProperties, Link, CodeBlock],
   
     
     toolbar: ["bold", "italic","|",
@@ -88,6 +88,7 @@ const editorConfiguration = function(token) {
     'bulletedList', 'numberedList', "todoList", "|",
     'fontColor', 'fontBackgroundColor', "|",
     "underline", "strikethrough", "subscript", "superscript", "|",
+    'codeBlock', '|',
     "undo", "redo"],
   
     simpleUpload: {

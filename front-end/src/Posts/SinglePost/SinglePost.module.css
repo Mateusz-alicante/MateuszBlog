@@ -4,6 +4,7 @@
     background-color: whitesmoke;
     min-height: 10%;
     border-radius: 1em;
+    padding: 2em;
 }
 
 .title {
@@ -28,6 +29,7 @@
         background-color: whitesmoke;
         min-height: 10%;
         border-radius: 0;
+        padding: 0;
     }
     .image {
         margin: 2em auto;

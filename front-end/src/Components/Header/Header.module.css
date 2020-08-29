@@ -41,13 +41,14 @@
     }
     .innerContainer {
         padding-top: 1em;
+        margin: 0 .3em;
     }
     .navlink {
         font-size: 1em;
-        margin: 0 1em;
+        margin: 0 .3em;
     }
     .innerContainer a:hover {
         background: black;
     }
     
-  }
+}

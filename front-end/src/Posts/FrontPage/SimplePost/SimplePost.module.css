@@ -32,3 +32,20 @@
     margin-right: auto;
 }
 
+@media (max-width: 800px) {
+    .container {
+        width: 100%;
+        margin: 2px 0;
+        border: 1px solid whitesmoke;
+        border-radius: 1em;
+        padding: 0;
+        margin-top: 2em;
+    }
+    .image {
+        margin: 0 1em;
+    }
+    .container:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}

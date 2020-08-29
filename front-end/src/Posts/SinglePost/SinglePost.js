@@ -27,7 +27,7 @@ const SinglePost = () => {
         return (
             <div className={styles.container}>
                 <h1 className={styles.title} >{data.title}</h1>
-                <h4>{data.description}</h4>
+                <h4  className={styles.description}>{data.description}</h4>
                 <img className={styles.image} src={data.imageURL} />
                 <div className={styles.body}>
                     <div className="ck-content" dangerouslySetInnerHTML={{__html: data.body}} />

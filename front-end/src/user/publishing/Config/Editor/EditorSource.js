@@ -4,7 +4,7 @@ import CKEditor from '@ckeditor/ckeditor5-react'
 import ClassicEditor from "@ckeditor/ckeditor5-editor-classic/src/classiceditor";
 import editorConfiguration from './EditorConfig'
 
-
+import { connect } from 'react-redux'
 
 
 class EditorSource extends React.Component {
@@ -14,7 +14,7 @@ class EditorSource extends React.Component {
   }
 
   componentWillMount() {
-    this.setState({editorConfig: editorConfiguration('test')})
+    this.setState({editorConfig: editorConfiguration(this.props.redux.auth.token)})
   }
   render() {
 
@@ -32,4 +32,10 @@ class EditorSource extends React.Component {
   }
 }
 
-export default EditorSource
+const mapStateToProps = (state) => {
+  return {
+      redux: state
+  }
+}
+
+export default connect(mapStateToProps)(EditorSource)

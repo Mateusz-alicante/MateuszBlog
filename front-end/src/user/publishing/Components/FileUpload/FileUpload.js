@@ -3,31 +3,48 @@ import React from 'react'
 import styles from './FileUpload.module.css'
 import { toast } from 'react-toastify';
 import axios from 'axios'
+import isURL from 'validator/es/lib/isURL';
+
+import { connect } from 'react-redux'
 
 class FileUpload extends React.Component {
     state = {
-        imagestatus: undefined
+        imagestatus: undefined,
+        imageURL: undefined
     }
+
     submitMainImage = async () => {
         var formData = new FormData(document.getElementById('mainImageForm'));
 
-        this.setState({imageStatus: "loading"})
+        this.setState({ imageStatus: "loading" })
 
         const response = await axios.post(this.props.url, formData
-            // , {
-            // headers: {
-            //     authorization: this.props.redux.auth.token
-            // }}
-            ).catch((e) => {
+            , {
+                headers: {
+                    authorization: this.props.redux.auth.token
+                }
+            }
+        ).catch((e) => {
             toast.error(`Wystąpił błąd: ${e.response.data} `)
-            this.setState({imageStatus: "error"})
+            this.setState({ imageStatus: "error" })
         })
 
         if (response && response.status === 200) {
-            this.setState({imageStatus: "done"})
+            this.setState({ imageStatus: "done" })
+            this.setState({ imageURL: response.data.url })
             this.props.handleImageUploaded(response.data.url)
         }
-        
+
+    }
+
+    enteredImageURL = async (e) => {
+        e.preventDefault()
+        if (isURL(e.target.value)) {
+            await this.setState({ imageURL: e.target.value })
+            this.setState({ imageStatus: "done" })
+            this.props.handleImageUploaded(this.state.imageURL)
+        }
+
     }
 
     render() {
@@ -42,15 +59,20 @@ class FileUpload extends React.Component {
                     {this.state.imageStatus === "error" && <span id={styles.errorStatusIndicator} className="material-icons">error</span>}
 
                 </div>
+                <div>
+                    <label>Or enter an URL</label>
+                    <input onChange={this.enteredImageURL} type="text" />
+                </div>
+                <div>
+                    <img src={this.state.imageURL} />
+                </div>
             </form>
         )
     }
 }
 
-// const mapStateToProps = (state) => ({
-//     redux: state
-// })
+const mapStateToProps = (state) => ({
+    redux: state
+})
 
-// export default connect(mapStateToProps)(FileUpload)
-
-export default FileUpload
+export default connect(mapStateToProps)(FileUpload)

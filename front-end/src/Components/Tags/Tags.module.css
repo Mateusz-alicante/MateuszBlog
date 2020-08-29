@@ -1,0 +1,18 @@
+.tagSingleContainer {
+    border: .2em solid;
+    border-radius: 3em;
+    margin: 1em 1em;
+}
+
+.tagContainer {
+    display: flex;
+    margin-top: 3em;
+    flex-wrap: wrap;
+    align-content: space-between;
+}
+
+.tag {
+    margin: .5em .5em;
+    white-space: nowrap;
+    user-select: none;
+}

@@ -1,0 +1,53 @@
+.outerContainer {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+
+    background: lightslategrey;
+    height: 4em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    z-index: 100000;
+}
+
+.innerContainer {
+    padding-top: 2em;
+    height: 2em;
+    margin: 0 1em;
+}
+
+.navlink {
+    background: rgb(146, 168, 190);
+    margin: 0 2em;
+    padding: .7em;
+    text-decoration: none;
+    cursor: pointer;
+    color: black;
+}
+
+.navlinkActive {
+    background: black;
+    color: white;
+}
+
+.innerContainer a:hover {
+    background: gray;
+}
+
+@media only screen and (max-width: 500px) {
+    .outerContainer {
+        height: 3em;
+    }
+    .innerContainer {
+        padding-top: 1em;
+    }
+    .navlink {
+        font-size: 1em;
+        margin: 0 1em;
+    }
+    .innerContainer a:hover {
+        background: black;
+    }
+    
+  }

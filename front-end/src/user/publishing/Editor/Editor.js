@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import EditorSource from '../../publishing/Config/Editor/EditorSource'
 import FileUpload from '../Components/FileUpload/FileUpload'
+import { connect } from 'react-redux'
 const axios = require('axios').default
 
-const Editor = () => {
+const Editor = (props) => {
 
-    const [editorData, setEditorData] = useState("")
+    const [body, setBody] = useState("")
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
-    const [url, setUrl] = useState("")
+    const [imageURL, setImageURL] = useState("")
     const [tags, setTags] = useState([])
 
 
@@ -16,10 +17,13 @@ const Editor = () => {
         axios.post('/api/posts/savePost', {
             title,
             description,
-            url,
+            imageURL,
             tags,
-            editorData
-        }).then(function (response) {
+            body
+        }, {
+            headers: {
+                authorization: props.redux.auth.token
+            }}).then(function (response) {
                 // handle success
                 console.log(response);
             })
@@ -37,11 +41,11 @@ const Editor = () => {
                 <label>Description:</label>
                 <input type='textarea' onChange={(event) => setDescription(event.target.value)} />
                 <label>Image:</label>
-                <FileUpload url='/api/imageUpload/upload' handleImageUploaded={(url) => setUrl(url)} />
+                <FileUpload url='/api/imageUpload/upload' handleImageUploaded={(url) => setImageURL(url)} />
                 <label>Tags:</label>
                 <input type="text" onChange={(event) => setTags(event.target.value.split(', '))} />
                 <label>body:</label>
-                <EditorSource data={editorData} onChange={data => setEditorData(data)} />
+                <EditorSource data={body} onChange={data => setBody(data)} />
                 <button onClick={request}>Save</button>
             </div>
 
@@ -50,4 +54,8 @@ const Editor = () => {
     )
 }
 
-export default Editor
+const mapStateToProps = (state) => ({
+    redux: state
+})
+
+export default connect(mapStateToProps)(Editor)

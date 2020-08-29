@@ -1,6 +1,8 @@
 .container {
     width: 70%;
+    background: whitesmoke;
     margin: 3em auto;
+    border: 5px solid whitesmoke;
     border-radius: 3em;
     padding: 3em;
     cursor: pointer;

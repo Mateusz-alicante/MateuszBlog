@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react'
 import styles from './SimplePost.module.css'
 import Tags from '../../../Components/Tags/Tags'
+import { useHistory } from "react-router-dom";
 
 const SimplePost = ({ post }) => {
 
-    useEffect(() => console.log(post))
+    const history = useHistory()
 
     return (
-        <div className={styles.container}>
+        <div className={styles.container} onClick={() => history.push(`/post/${post._id}`)}>
             <div>
                 <img className={styles.image} src={post.imageURL} />
             </div>

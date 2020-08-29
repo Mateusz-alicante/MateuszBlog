@@ -7,6 +7,7 @@ import UserRouter from './NestedRouters/User'
 import AuthRouter from './NestedRouters/Auth'
 import FrontPage from '../Posts/FrontPage/FrontPage'
 import styles from './MainRouter.module.css'
+import SinglePost from '../Posts/SinglePost/SinglePost'
 
 const App = () => {
     return (
@@ -20,6 +21,9 @@ const App = () => {
                 </Route>
                 <Route path="/" exact>
                     <FrontPage />
+                </Route>
+                <Route path="/post/:id" exact={false}>
+                    <SinglePost />
                 </Route>
             </Switch>
         </div>

@@ -19,7 +19,7 @@
   "scripts": {
     "start": "node back-end/index.js",
     "dev": "concurrently --kill-others \"npm run start\" \"npm start --prefix front-end\"",
-    "heroku-postbuild": "cd front-end && npm install && npm run build"
+    "postinstall": "cd front-end && npm install && npm run build"
   },
   "author": "",
   "license": "ISC"

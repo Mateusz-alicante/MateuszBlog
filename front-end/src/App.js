@@ -5,6 +5,7 @@ import {
   BrowserRouter as Router,
 } from "react-router-dom";
 import Header from './Components/Header/Header'
+import Head from './Components/Head/Head'
 
 import store from './utils/Redux/StoreConfig'
 import { Provider } from 'react-redux'
@@ -12,6 +13,7 @@ import { Provider } from 'react-redux'
 function App() {
   return (
     <div className="App">
+      <Head />
       <Provider store={store}>
         <Router>
           <Header />

@@ -3,6 +3,10 @@ import styles from './Tags.module.css'
 
 const Tags = ({tags}) => {
 
+    useEffect(() => {
+        console.log(tags)
+    }, [])
+
     return (
         <div className={styles.tagContainer}>
             {tags.map((tag) => (

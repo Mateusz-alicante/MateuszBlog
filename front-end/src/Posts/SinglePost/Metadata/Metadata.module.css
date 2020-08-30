@@ -1,5 +1,6 @@
 .innerContainer {
     display: flex;
+    justify-content: space-between;
 }
 
 .metadataModule {

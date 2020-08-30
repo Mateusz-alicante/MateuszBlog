@@ -26,10 +26,10 @@ router.get('/loadPosts', async (req, res) => {
 
 router.get('/fetchPost', async (req, res) => {
   id = req.query.id
-  const post = await Post.find({_id: id})
-    .select(" -__v -views")
-    
-  res.send(post[0])
+  const post = await Post.findOneAndUpdate({_id :id}, {$inc : {'views' : 1}}).select(" -__v -views").exec();
+  // const post = await Post.find({_id: id}).select(" -__v -views")
+  res.send(post)
+
 })
 
   

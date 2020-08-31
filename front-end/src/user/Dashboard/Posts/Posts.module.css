@@ -1,0 +1,9 @@
+.toolbarContainer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.innerContainer {
+    background: whitesmoke;
+    border-radius: 3em;
+}

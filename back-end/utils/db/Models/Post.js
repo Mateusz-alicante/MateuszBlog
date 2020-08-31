@@ -3,8 +3,6 @@ const mongoose = require('mongoose');
 const postSchema = new mongoose.Schema({
     title: {
         type: String,
-        unique: true,
-        minlength: 5
     },
     description: String,
     tags: Array,
@@ -12,7 +10,8 @@ const postSchema = new mongoose.Schema({
     body: String,
     createdAt: {type: Date, default: Date.now()},
     author: String,
-    views: {type: Number, default: 0}
+    views: {type: Number, default: 0},
+    isPublic: Boolean
 });
 
 const Post = mongoose.model('Post', postSchema)

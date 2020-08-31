@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 
 const nonAdminAuth = (req, res, next) => {
-  console.log("authenticating user")
   //get the token from the header if present
   const token = req.headers["authorization"];
   
@@ -20,10 +19,8 @@ const nonAdminAuth = (req, res, next) => {
 };
 
 const AdminAuth = (req, res, next) => {
-  console.log("authenticating user")
   //get the token from the header if present
   const token = req.headers["authorization"];
-  console.log(token)
   //if no token found, return response (without going to the next middelware)
   if (!token) return res.status(401).send("Access denied. No token provided.");
 

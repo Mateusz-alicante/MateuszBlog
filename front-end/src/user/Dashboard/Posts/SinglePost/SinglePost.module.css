@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.circle {
+    height: 2em;
+    width: 2em;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 1em;
+}

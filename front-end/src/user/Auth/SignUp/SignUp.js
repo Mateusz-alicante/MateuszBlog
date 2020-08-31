@@ -5,6 +5,7 @@ import setAuthInfo from '../../../utils/Redux/Actions/Auth'
 import { connect } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import styles from './SignUp.module.css'
+import { toast } from 'react-toastify';
 
 const SignUp = (props) => {
 
@@ -22,10 +23,17 @@ const SignUp = (props) => {
             name,
             password
         })
-        if (response && response.status === 200) {
+        if (response && response.status === 200 && response.data.token) {
             props.dispatch(setAuthInfo({ token: response.headers['x-auth-token'], ...response.data }))
             setStatus(undefined)
             history.push('/')
+            toast.success('Login successful' ,{
+                position: toast.POSITION.BOTTOM_RIGHT,
+              })
+        } else {
+            toast.error('Login unsuccessful, check the credencials and try again' ,{
+                position: toast.POSITION.BOTTOM_RIGHT,
+              })
         }
     }
 
@@ -38,7 +46,7 @@ const SignUp = (props) => {
                 <input onChange={(e) => setName(e.target.value)} type='text' />
                 <label>password:</label>
                 <input onChange={(e) => setPassword(e.target.value)} type='text' />
-                <button disabled={() => status == 'loading'}>SignUp</button>
+                <button disabled={status == 'loading'}>SignUp</button>
                 <Link to='/auth/login'>Login</Link>
             </form>
         </div>

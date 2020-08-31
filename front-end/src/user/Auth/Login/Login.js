@@ -25,9 +25,13 @@ const Login = (props) => {
             props.dispatch(setAuthInfo({ token: response.headers['x-auth-token'], ...response.data }))
             setStatus(undefined)
             history.push('/')
-            toast.success('Login successful')
+            toast.success('Login successful' ,{
+                position: toast.POSITION.BOTTOM_RIGHT,
+              })
         } else {
-            toast.error('Login unsuccessful, check the credencials and try again')
+            toast.error('Login unsuccessful, check the credencials and try again' ,{
+                position: toast.POSITION.BOTTOM_RIGHT,
+              })
         }
     }
 
@@ -42,7 +46,7 @@ const Login = (props) => {
                     <label>password:</label>
                     <input type='password' onChange={(event) => setPassword(event.target.value)} />
                 </div>
-                <button disabled={() => status == 'loading'}>Login</button>
+                <button disabled={status == 'loading'}>Login</button>
                 <Link to='/auth/signup'>Sign up</Link>
             </form>
         </div>

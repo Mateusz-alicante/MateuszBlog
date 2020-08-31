@@ -8,10 +8,17 @@ import isURL from 'validator/es/lib/isURL';
 import { connect } from 'react-redux'
 
 class FileUpload extends React.Component {
+
     state = {
         imagestatus: undefined,
-        imageURL: undefined
+        imageURL: this.props.imageURL
     }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        return {
+          imageURL: nextProps.imageURL
+        };
+      }
 
     submitMainImage = async () => {
         var formData = new FormData(document.getElementById('mainImageForm'));
@@ -25,7 +32,7 @@ class FileUpload extends React.Component {
                 }
             }
         ).catch((e) => {
-            toast.error(`Wystąpił błąd: ${e.response.data} `)
+            toast.error(`An error occurred: ${e.response.data} `)
             this.setState({ imageStatus: "error" })
         })
 
@@ -40,11 +47,18 @@ class FileUpload extends React.Component {
     enteredImageURL = async (e) => {
         e.preventDefault()
         if (isURL(e.target.value)) {
-            await this.setState({ imageURL: e.target.value })
-            this.setState({ imageStatus: "done" })
-            this.props.handleImageUploaded(this.state.imageURL)
+            this.setState({ imageURL: e.target.value, imageStatus: "done" })
+            this.props.handleImageUploaded(e.target.value)
+            console.log(this.state)
+        } else {
+            this.setState({imageStatus: 'error'})
         }
 
+    }
+
+    testFunc = (e) => {
+        e.preventDefault()
+        console.log(this.props)
     }
 
     render() {
@@ -61,11 +75,12 @@ class FileUpload extends React.Component {
                 </div>
                 <div>
                     <label>Or enter an URL</label>
-                    <input onChange={this.enteredImageURL} type="text" />
+                    <input defaultValue={this.state.imageURL} onChange={this.enteredImageURL} type="text" />
                 </div>
                 <div>
                     <img src={this.state.imageURL} />
                 </div>
+                <button onClick={this.testFunc}>test</button>
             </form>
         )
     }

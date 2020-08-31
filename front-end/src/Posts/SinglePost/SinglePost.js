@@ -14,6 +14,7 @@ const SinglePost = () => {
 
     const fetchArticle = async () => {
         const response = await axios.get(`/api/posts/fetchPost?id=${id}`)
+        console.log(response)
         if (response && response.status === 200) {
             setData(response.data)
             setStatus('OK')
@@ -31,7 +32,7 @@ const SinglePost = () => {
                     <meta charSet="utf-8" />
                     <title>{data.title}</title>
                     <meta name="description" content={data.description} />
-                    <meta name="keywords" content={[...data.tags, data.title].join(', ')}></meta>
+                    <meta name="keywords" content={[data.tags + data.title].join(', ')}></meta>
                 </Helmet>
                 <div className={styles.container}>
                     <h1 className={styles.title} >{data.title}</h1>

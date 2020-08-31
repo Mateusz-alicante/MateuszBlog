@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styles from './Tags.module.css'
 
 const Tags = ({tags}) => {
 
-    useEffect(() => {
-        console.log(tags)
-    }, [])
 
     return (
         <div className={styles.tagContainer}>

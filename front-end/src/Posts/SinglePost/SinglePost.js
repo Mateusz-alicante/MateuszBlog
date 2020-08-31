@@ -18,7 +18,6 @@ const SinglePost = () => {
         if (response && response.status === 200) {
             setData(response.data)
             setStatus('OK')
-            console.log(response.data)
         }
     }
 

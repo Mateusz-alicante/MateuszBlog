@@ -9,7 +9,6 @@ const Metadata = ({ id, createdAt }) => {
 
     const FetchUser = async () => {
         const response = await axios.get(`/api/auth/fetchUserInfo?id=${id}`)
-        console.log(response)
         if (response && response.status == 200) {
             setUser(response.data)
         }

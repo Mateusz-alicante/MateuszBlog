@@ -56,10 +56,6 @@ class FileUpload extends React.Component {
 
     }
 
-    testFunc = (e) => {
-        e.preventDefault()
-        console.log(this.props)
-    }
 
     render() {
         return (
@@ -80,7 +76,6 @@ class FileUpload extends React.Component {
                 <div>
                     <img src={this.state.imageURL} />
                 </div>
-                <button onClick={this.testFunc}>test</button>
             </form>
         )
     }

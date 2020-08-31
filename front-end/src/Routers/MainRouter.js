@@ -8,6 +8,7 @@ import AuthRouter from './NestedRouters/Auth'
 import FrontPage from '../Posts/FrontPage/FrontPage'
 import styles from './MainRouter.module.css'
 import SinglePost from '../Posts/SinglePost/SinglePost'
+import About from '../Components/About/About'
 
 const App = () => {
     return (
@@ -24,6 +25,9 @@ const App = () => {
                 </Route>
                 <Route path="/post/:id" exact={false}>
                     <SinglePost />
+                </Route>
+                <Route path='/about'>
+                    <About />
                 </Route>
             </Switch>
         </div>

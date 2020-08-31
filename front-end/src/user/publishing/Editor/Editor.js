@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react'
 import EditorSource from '../../publishing/Config/Editor/EditorSource'
 import FileUpload from '../Components/FileUpload/FileUpload'
 import { connect } from 'react-redux'
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify';
+import styles from './Editor.module.css'
+
 const axios = require('axios').default
 
 
@@ -27,7 +29,7 @@ const Editor = (props) => {
     }, [])
 
     useEffect(() => {
-        const interval = setInterval(post, 180000, {preventDefault: () => {}})
+        const interval = setInterval(post, 180000, { preventDefault: () => { } })
         return () => clearInterval(interval)
     })
 
@@ -35,11 +37,12 @@ const Editor = (props) => {
         const response = await axios.get(`/api/posts/fetchPostEditor?id=${id}`, {
             headers: {
                 authorization: props.redux.auth.token
-        }}).catch(e => {
-            toast.error(`An error ocurred: ${e}` ,{
+            }
+        }).catch(e => {
+            toast.error(`An error ocurred: ${e}`, {
                 position: toast.POSITION.BOTTOM_RIGHT,
             })
-        }) 
+        })
         if (response && response.status === 200) {
             const post = response.data
             setTitle(post.title)
@@ -50,7 +53,7 @@ const Editor = (props) => {
             setPublic(post.isPublic)
             setId(post._id)
 
-            toast.success(`Post data loaded` ,{
+            toast.success(`Post data loaded`, {
                 position: toast.POSITION.BOTTOM_RIGHT,
             })
         }
@@ -71,16 +74,16 @@ const Editor = (props) => {
             headers: {
                 authorization: props.redux.auth.token,
                 id
-            }}).then(function (response) {
-                toast.success('Post successfully saved' ,{
-                    position: toast.POSITION.BOTTOM_RIGHT,
-                  })
-                console.log('saved data')
+            }
+        }).then(function (response) {
+            toast.success('Post successfully saved', {
+                position: toast.POSITION.BOTTOM_RIGHT,
             })
+        })
             .catch(function (error) {
-                toast.error(`Got error when trying to save post: ${error}` ,{
+                toast.error(`Got error when trying to save post: ${error}`, {
                     position: toast.POSITION.BOTTOM_RIGHT,
-                  })
+                })
             })
     }
 
@@ -95,21 +98,36 @@ const Editor = (props) => {
 
 
     return (
-        <div className="App">
-            <div>
-                <label>Title:</label>
-                <input type='text' value={title} onChange={(event) => setTitle(event.target.value)} />
-                <label>Description:</label>
-                <input type='textarea' value={description} onChange={(event) => setDescription(event.target.value)} />
-                <label>Image:</label>
-                <FileUpload url='/api/imageUpload/upload' imageURL={imageURL} handleImageUploaded={(url) => setImageURL(url)} />
-                <label>Tags:</label>
-                <input type="text" value={tags.join(', ')} onChange={(event) => setTags(event.target.value.split(', '))} />
-                <label>body:</label>
-                <EditorSource data={body} onChange={data => setBody(data)} />
-                <input type="checkbox" checked={isPublic} onClick={() => setPublic(!isPublic)}></input>
-                <button onClick={post}>Quicksave</button>
-                <button onClick={saveAndFinish}>Save and finish</button>
+        <div className={styles.outerContainer}>
+            <div className={styles.innerContainer}>
+                <div className={styles.commonContainer}>
+                    <label>Title:</label>
+                    <input type='text' value={title} onChange={(event) => setTitle(event.target.value)} />
+                </div>
+                <div className={styles.commonContainer}>
+                    <label>Description:</label>
+                    <textarea value={description} onChange={(event) => setDescription(event.target.value)} />
+                </div>
+                <div className={styles.image} >
+                    <label className={styles.image__label}>Image:</label>
+                    <FileUpload url='/api/imageUpload/upload' imageURL={imageURL} handleImageUploaded={(url) => setImageURL(url)} />
+                </div>
+                <div className={styles.commonContainer} style={{marginTop: "1em"}}>
+                    <label>Tags:</label>
+                    <input type="text" value={tags.join(', ')} onChange={(event) => setTags(event.target.value.split(', '))} />
+                </div>
+                <div className={styles.editorContainer} >
+                    <label style={{fontSize: "3em"}} >body:</label>
+                    <EditorSource data={body} onChange={data => setBody(data)} className={styles.Editor} />
+                </div>
+                <div className={styles.commonContainer} style={{marginTop: "1em"}}>
+                    <label>Make publically visible:</label>
+                    <input type="checkbox" checked={isPublic} onClick={() => setPublic(!isPublic)}></input>
+                </div>
+                <div className={styles.buttonContainer}>
+                    <button onClick={post}>Quicksave</button>
+                    <button onClick={saveAndFinish}>Save and finish</button>
+                </div>
             </div>
         </div>
     )

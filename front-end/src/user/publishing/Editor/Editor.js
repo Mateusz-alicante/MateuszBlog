@@ -19,6 +19,7 @@ const Editor = (props) => {
     const [tags, setTags] = useState([])
     const [isPublic, setPublic] = useState(false)
     const [id, setId] = useState(undefined)
+    const [createdAt, setCreatedAt] = useState(undefined)
     const queryString = require('query-string');
 
     useEffect(() => {
@@ -52,6 +53,7 @@ const Editor = (props) => {
             setTags(post.tags)
             setPublic(post.isPublic)
             setId(post._id)
+            setCreatedAt(post.createdAt)
 
             toast.success(`Post data loaded`, {
                 position: toast.POSITION.BOTTOM_RIGHT,
@@ -69,7 +71,8 @@ const Editor = (props) => {
             imageURL,
             tags,
             body,
-            isPublic
+            isPublic,
+            createdAt
         }, {
             headers: {
                 authorization: props.redux.auth.token,
@@ -94,6 +97,11 @@ const Editor = (props) => {
         } else {
             history.push('/')
         }
+    }
+
+    const handleResetDate = (e) => {
+        e.preventDefault()
+        setCreatedAt(Date.now())
     }
 
 
@@ -123,6 +131,10 @@ const Editor = (props) => {
                 <div className={styles.commonContainer} style={{marginTop: "1em"}}>
                     <label>Make publically visible:</label>
                     <input type="checkbox" checked={isPublic} onClick={() => setPublic(!isPublic)}></input>
+                </div>
+                <div>
+                    <label>Reset date published:</label>
+                    <button onClick={handleResetDate}>Reset</button>
                 </div>
                 <div className={styles.buttonContainer}>
                     <button onClick={post}>Quicksave</button>
